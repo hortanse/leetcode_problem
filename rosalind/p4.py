@@ -29,5 +29,27 @@ Sample Dataset
 5 3
 Sample Output
 19
-
+Month 1: 1 pair (immature)
+Month 2: 1 pair (now mature)
+Month 3: 1 pair (mature) + 3 pairs (immature) = 4 pairs
+Month 4: 4 pairs (1 mature + 3 now mature) + 3 pairs (immature from mature pair) = 7 pairs
+Month 5: 7 pairs (4 mature + 3 now mature) + 12 pairs (immature from 4 mature pairs) = 19 pairs
 """
+def fibonacci_rabbits(n, k):
+    #Initialize first two months
+    mature = 0  #Mature pairs of rabbits
+    immature = 1 #Immature pairs of rabbits
+
+    #calculat for each month
+    for month in range (2, n + 1):
+        #Calculate new rabbits
+        new_rabbits = mature * k # Each mature pair produce k new pairs
+        #Previous immature rabbits become mature
+        mature = mature + immature
+        # New rabbits become the immature ones
+        immature = new_rabbits
+    return mature + immature # Total pairs
+
+#Test with sample data
+n, k = 5, 3
+print(fibonacci_rabbits(n , k))
